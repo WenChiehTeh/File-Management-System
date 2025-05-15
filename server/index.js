@@ -23,6 +23,9 @@ const pool = new Pool({
     database: database,
     password: password,
     port: pgPort,
+    ssl: {
+    rejectUnauthorized: false
+    }
 });
 
 app.get('/api/getNotes', async (req, res) => {
