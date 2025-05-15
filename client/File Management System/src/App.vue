@@ -10,12 +10,15 @@ import sidebar from "../src/components/sidebar.vue"
 import editor from "../src/components/editor.vue"
 import { ref, onMounted } from "vue"
 
+const url = import.meta.env.VITE_BACKEND_URL
+console.log(url)
+
 const notes = ref([])
 const selectedNote = ref(null)
 
 const getNotes = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/getNotes')
+        const res = await fetch(`${url}/api/getNotes`)
         const data = await res.json()
         notes.value = data
     } catch (err) {
@@ -25,7 +28,7 @@ const getNotes = async () => {
 
 const createNote = async (note) => {
     try {
-        const res = await fetch("http://localhost:3000/api/createNote", {
+        const res = await fetch(`${url}/api/createNote`, {
         method: "POST",
         headers: {
             "Content-Type" : "application/json"
@@ -45,7 +48,7 @@ const createNote = async (note) => {
 
 const deleteNote = async (id) => {
     try {
-        await fetch(`http://localhost:3000/api/deleteNote/${id}`, {
+        await fetch(`${url}/api/deleteNote/${id}`, {
           method: "DELETE"
         })
         await getNotes()
@@ -58,7 +61,7 @@ const deleteNote = async (id) => {
 
 const updateNote = async (note) => {
     try {
-        await fetch(`http://localhost:3000/api/updateNote/${note.id}`, {
+        await fetch(`${url}/api/updateNote/${note.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type" : "application/json",
