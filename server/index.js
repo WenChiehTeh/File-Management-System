@@ -11,14 +11,18 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const databasePassword = process.env.databasePassword;
+const user = process.env.PGUSER;
+const host = process.env.PGHOST;
+const database = process.env.PGDATABASE;
+const password = process.env.PGPASSWORD;
+const pgPort = process.env.PGPORT;
 
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "File Management System TWC",
-    password: databasePassword,
-    port: 5432,
+    user: user,
+    host: host,
+    database: database,
+    password: password,
+    port: pgPort,
 });
 
 app.get('/api/getNotes', async (req, res) => {
