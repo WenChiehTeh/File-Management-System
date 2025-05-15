@@ -14,9 +14,13 @@ const notes = ref([])
 const selectedNote = ref(null)
 
 const getNotes = async () => {
-    const res = await fetch('http://localhost:3000/api/getNotes')
-    const data = await res.json()
-    notes.value = data
+    try {
+        const res = await fetch('http://localhost:3000/api/getNotes')
+        const data = await res.json()
+        notes.value = data
+    } catch (err) {
+        console.log("Failed to fetch: " + err)
+    }
 }
 
 const createNote = async (note) => {

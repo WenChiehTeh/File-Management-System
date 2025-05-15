@@ -3,9 +3,11 @@
         <div class="sidebarHeader">
             <h1>My Notes</h1>
         </div>
+
         <div class-="addBtnDiv">
-            <button class="addNoteBtn" @click="$emit('addNote')">Add Note</button>
+            <button class="addNoteBtn" @click="$emit('addNote')">+</button>
         </div>
+
         <div v-for="(group, label) in groupedNotes" :key="label" class="notes">
             <h2>{{ label }}</h2>
             <noteCard v-for="note in group" :key="note.id" :note="note" @click="$emit('select', note)" @delete="$emit('delete', note.id)"/>
@@ -51,7 +53,7 @@ const groupedNotes = computed(() => {
     }
 
     aside {
-        height: 96.5%;
+        min-height: 90vh;
         width: 25vw;
         max-width: 25vw;
         border-top-right-radius: 20px;
@@ -62,7 +64,8 @@ const groupedNotes = computed(() => {
     }
 
     h1, h2 {
-        text-align: center;
+        text-align: left;
+        font-family: "Inter";
     }
 
     h1 {
@@ -75,20 +78,31 @@ const groupedNotes = computed(() => {
     }
 
     .sidebarHeader {
-        padding: 15px;
-        margin: 10px;
+        margin: 20px 10px;
     }
 
     .addBtnDiv {
-        height: 17%
+        height: 17%;
     }
     
     .addNoteBtn{
-        width: 80%;
+        width: 90px;
         margin: 0px 10%;
-        border-radius: 15px;
+        border-radius: 100%;
+        border: none;
         background-color: #56A7E3;
+        transition: background-color 0.3s ease;
         font-size: 30px;
+        font-weight: 800;
+        position: absolute;
+        top: 92%;
+        left: 12%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-align: center;
+    }
+
+    .addNoteBtn:hover {
+        background-color: #1885d8;
     }
     
     .notes {

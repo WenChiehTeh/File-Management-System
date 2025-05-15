@@ -1,20 +1,30 @@
 <template>
     <div v-if="note" class="noteEditor">
-        <input v-model="title" class="title" placeholder="Untitled Note" />
-        <p class="error"> {{ message1 }} </p>
-        <p class="date">{{ formatDate(note.createdat) }}</p>
-        <hr />
-        <textarea v-model="content" class="content" placeholder="Start typing..."></textarea>
-        <p class="error"> {{ message2 }} </p>
-        <button @click="saveNote" class="updateBtn">Update Note</button>
+        <div class="top">
+            <input v-model="title" class="title" placeholder="Untitled Note" />
+            <p class="error"> {{ message1 }} </p>
+            <p class="date">{{ formatDate(note.createdat) }}</p>
+            <hr />
+            <textarea v-model="content" class="content" placeholder="Start typing..."></textarea>
+            <p class="error"> {{ message2 }} </p>
+        </div>
+
+        <div class="bottom">
+            <button @click="saveNote" class="updateBtn">Update Note</button>            
+        </div>
     </div>
     <div v-else class="noteEditor">
-        <input v-model="title" class="title" placeholder="Untitled Note" />
-        <p class="error"> {{ message1 }} </p>
-        <hr />
-        <textarea v-model="content" class="content" placeholder="Start typing..."></textarea>
-        <p class="error"> {{ message2 }} </p>
-        <button @click="createNote" class="updateBtn">Create Note</button>
+        <div class="top">
+            <input v-model="title" class="title" placeholder="Untitled Note" />
+            <p class="error"> {{ message1 }} </p>
+            <hr />
+            <textarea v-model="content" class="content" placeholder="Start typing..."></textarea>
+            <p class="error"> {{ message2 }} </p>
+        </div>
+
+        <div class="bottom">
+            <button @click="createNote" class="updateBtn">Create Note</button>
+        </div>        
     </div>
 </template>
 
@@ -85,6 +95,9 @@ const saveNote = () => {
 
 <style scoped>
 .noteEditor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 70%;
     min-height: 90vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -92,6 +105,15 @@ const saveNote = () => {
     border-radius: 15px;
     padding: 20px;
     margin: 20px;
+}
+
+.top {
+    height: 90%
+}
+
+.bottom {
+    height: 5%;
+    max-height: 10%;
 }
 
 .title {
@@ -126,13 +148,17 @@ hr {
     background: transparent;
     border: none;
     width: 100%;
-    height: 75%;
+    height: 85%;
 }
 
 .updateBtn {
     background-color: #56A7E3;
+    transition: background-color 0.3s ease;
     width: 100%;
-    margin: 30px 0px
+}
+
+.updateBtn:hover {
+    background-color: #1885d8;
 }
 
 .error {

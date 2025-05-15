@@ -47,6 +47,11 @@ button {
     height: 10%;
     margin: 15px 0px 0px 0px;
     background-color: 	#e21f1f;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c00707;
 }
 
 h3 {
